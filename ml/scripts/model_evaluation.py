@@ -33,4 +33,20 @@ def load_model(model_path):
     return model
 
 def main():
-    df = load_d
+    df = load_and_preprocess_data()
+    X = df['text']
+    y = df['label']
+    X_train, X_valid, X_test, y_train, y_valid, y_test = train_valid_test_split(X, y)
+    xv_train, xv_valid, xv_test, vectorizer = vectorize_data(X_train, X_valid, X_test)
+
+    model_name = 'decisiontree'
+    model_path = f"/home/jparep/proj/nlp-detect-fake-news/ml/model/{model_name}.pkl"
+    model = load_model(model_path)
+    y_train_pred = model.predict(xv_train)
+    y_valid_pred = model.predict(xv_valid)
+    y_test_pred = model.predict(xv_test)
+    
+    # Evaluate model
+    evaluate_model(y_train, y_train_pred, f"{model_name} (train)")
+    evaluate_model(y_valid, y_valid_pred, f"{model_name} (valid)")
+    evaluate_model(y_test, y_test_pred, f"{model_name} (test)")
