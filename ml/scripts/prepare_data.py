@@ -14,6 +14,9 @@ from sklearn.model_selection import train_test_split
 # nltk.download('wordnet')
 # nltk.download('stopwords')
 
+# Initalize stopwords and lemmatizer
+stop_words = set(stopwords.words('english'))
+lemmatizer = WordNetLemmatizer()
 
 
 
