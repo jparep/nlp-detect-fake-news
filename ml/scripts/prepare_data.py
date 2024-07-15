@@ -32,6 +32,9 @@ def load_data(real_csv, fake_csv):
 # Preprocess data
 def preprocess_data(text):
     """Preprocess text data: remove non-alphaberical characters, lowercase, tokenize, lemmatize, remove stopwords"""
-    
+    text = re.sub(r'[^a-zA-Z0-9]+', ' ', text).lower()
+    word_tokens = word_tokenize(text)
+    lem = [lemmatizer.lemmatize(word) for word in word_tokens if word not in stop_words]
+    return ' '.join(lem)
 
 
