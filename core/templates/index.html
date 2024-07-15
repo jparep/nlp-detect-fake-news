@@ -1,0 +1,24 @@
+<!-- core/templates/index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake News Detection</title>
+    {% load static %}
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}">
+</head>
+<body>
+    <h1>Fake News Detection</h1>
+    <form method="POST" action="/predict/">
+        {% csrf_token %}
+        <textarea name="text" rows="4" cols="50" placeholder="Enter news text here..."></textarea>
+        <br>
+        <input type="submit" value="Predict">
+    </form>
+    {% if prediction %}
+        <h2>Prediction: {{ prediction }}</h2>
+    {% endif %}
+</body>
+</html>
