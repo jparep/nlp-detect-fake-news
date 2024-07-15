@@ -38,8 +38,16 @@ def preprocess_data(text):
     return ' '.join(lem)
 
 def load_and_preprocess_data():
+    """Load, concatenate, and preprocess data"""
     df = load_data(config.REAL_CSV_PATH, config.FAKE_CSV_PATH)
     df = df[['text', 'label']]
     df['text'] = df['text'].apply(preprocess_data)
     df['label'] = df['label'].map({'real': 0, 'fake': 1})
     return df
+
+def train_valid_test_split(X, y, train_size=0.7, valid_size=0.15, test_size=0.15):
+    X_train, X_temp, y_train, y_temp = train_test_split(X, y, test_size=(valid_size + test_size), random_state=config.RANDOM_SEED)
+    ratio = valid_size / (valid_size + test_size)
+    X_valid, X_test, y_valid, y_test = train_test_split(X_temp, y_temp, test_size=(1.0 - ratio), random_state=config.RANDOM_SEED)
+    
+    return X_train, X_valid, X_test, y_train, y_valid, y_test
