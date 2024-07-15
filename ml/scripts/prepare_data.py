@@ -37,4 +37,9 @@ def preprocess_data(text):
     lem = [lemmatizer.lemmatize(word) for word in word_tokens if word not in stop_words]
     return ' '.join(lem)
 
-
+def load_and_preprocess_data():
+    df = load_data(config.REAL_CSV_PATH, config.FAKE_CSV_PATH)
+    df = df[['text', 'label']]
+    df['text'] = df['text'].apply(preprocess_data)
+    df['label'] = df['label'].map({'real': 0, 'fake': 1})
+    return df
