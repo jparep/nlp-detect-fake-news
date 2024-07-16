@@ -2,8 +2,8 @@
 
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.tree import DecisionTreeClassifier
-from . import config
-from .utils import save_pickle
+import config
+from utils import save_pickle
 
 def train_model(X_train, y_train, model):
     """Train the model."""

@@ -28,7 +28,7 @@ MODEL_PATHS = {
 # Path to vectorizer
 VECTORIZER_PATH = os.path.join(MODEL_DIR, 'vectorizer.pkl')
 
-# Make sure directory exist
+# Make sure directory exisist
 def ensure_dir(path):
     """Ensure the directory exists."""
     if not os.path.exists(path):

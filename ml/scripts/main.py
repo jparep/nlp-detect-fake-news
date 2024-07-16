@@ -1,7 +1,7 @@
 # main.py
 
 import os
-from ml.scripts.prepare_data import load_and_preprocess_data, train_valid_test_split, vectorize_data
+from prepare_data import load_and_preprocess_data, train_valid_test_split, vectorize_data
 from ml.scripts.train_model import train_and_save_models
 from ml.scripts.hyperparameter_tuning import hyperparameter_tuning
 from ml.scripts.evaluate_model import evaluate_model, plot_confusion_matrix
@@ -28,16 +28,22 @@ def main():
         train_and_save_models(xv_train, y_train)
 
         # Perform hyperparameter tuning and save the best model
-        optimized_model = hyperparameter_tuning(X_train, y_train)
+        optimized_model = hyperparameter_tuning(xv_train, y_train)
         save_pickle(optimized_model, config.MODEL_PATHS['optimized_model'])
 
         # Evaluate models and plot results
         for name, model_path in config.MODEL_PATHS.items():
             print(f"Evaluating {name.replace('_', ' ').title()}...")
             model = load_pickle(model_path)
-            y_train_pred = model.predict(xv_train)
-            y_valid_pred = model.predict(xv_valid)
-            y_test_pred = model.predict(xv_test)
+            
+            if name == 'optimized_model':
+                y_train_pred = model.predict(X_train)
+                y_valid_pred = model.predict(X_valid)
+                y_test_pred = model.predict(X_test)
+            else:
+                y_train_pred = model.predict(xv_train)
+                y_valid_pred = model.predict(xv_valid)
+                y_test_pred = model.predict(xv_test)
             
             evaluate_model(y_train, y_train_pred, f"{name.replace('_', ' ').title()} (train)")
             evaluate_model(y_valid, y_valid_pred, f"{name.replace('_', ' ').title()} (valid)")
