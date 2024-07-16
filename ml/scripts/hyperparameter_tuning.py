@@ -1,14 +1,25 @@
+# ml/scripts/hyperparameter_tuning.py
+
 from sklearn.pipeline import Pipeline
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import RandomizedSearchCV
+from utils import load_pickle
 import config
 
 def hyperparameter_tuning(X_train, y_train):
-    """Perform hyperparameter tuning using RandomizedSearchCV."""
+    """Perform hyperparameter tuning using RandomizedSearchCV on a pre-trained model if available."""
+    # Load pre-trained model if it exists
+    try:
+        pre_trained_model = load_pickle(config.MODEL_PATHS['decision_tree'])
+        print("Pre-trained model loaded successfully.")
+    except FileNotFoundError:
+        print("No pre-trained model found. Using a new DecisionTreeClassifier.")
+        pre_trained_model = DecisionTreeClassifier(random_state=config.RANDOM_SEED)
+    
     pipeline = Pipeline([
         ('vectorizer', TfidfVectorizer(max_features=10000)),
-        ('classifier', DecisionTreeClassifier(random_state=config.RANDOM_SEED))
+        ('classifier', pre_trained_model)
     ])
     
     param_dist = {
@@ -18,4 +29,5 @@ def hyperparameter_tuning(X_train, y_train):
     
     model = RandomizedSearchCV(pipeline, param_distributions=param_dist, n_iter=12, cv=10, n_jobs=-1, verbose=1, random_state=config.RANDOM_SEED)
     model.fit(X_train, y_train)
+    
     return model.best_estimator_
