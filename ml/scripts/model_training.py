@@ -48,7 +48,7 @@ def main():
     for name, model in models.items():
         print(f"Training {name}...")
         model_trained = train_model(xv_train, y_train, model)
-        save_model(model_trained, f"/home/jparep/proj/nlp-detect-fake-news/ml/model{name.replace(' ', '_').lower()}.pkl")
+        save_model(model_trained, f"/home/jparep/proj/nlp-detect-fake-news/ml/model/{name.replace(' ', '_').lower()}.pkl")
 
 if __name__ == "__main__":
     main()
