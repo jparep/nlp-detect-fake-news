@@ -1,11 +1,9 @@
 # Import libraries
 import os
-import pickle
 import matplotlib.pyplot as plt
 from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score, roc_auc_score, classification_report, confusion_matrix, ConfusionMatrixDisplay
 import config
-from data_preparation import load_and_preprocess_data, train_valid_test_split
-from model_training import vectorize_data
+from utils import load_and_preprocess_data, train_valid_test_split, vectorize_data, load_model
 
 def evaluate_model(y_true, y_pred, model_name):
     """Evaluate the model and print metrics."""
@@ -21,21 +19,13 @@ def evaluate_model(y_true, y_pred, model_name):
     print(f"Recall: {recall}")
     print(f"ROC AUC Score: {roc_auc}")
     print(classification_report(y_true, y_pred, target_names=['Real', 'Fake']))
-
+    
 def plot_confusion_matrix(y_true, y_pred):
     """Plot and display the confusion matrix."""
     cm = confusion_matrix(y_true, y_pred)
     disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=['Real', 'Fake'])
     disp.plot()
     plt.show()
-
-def load_model(model_path):
-    """Load a saved model."""
-    if not os.path.exists(model_path):
-        raise FileNotFoundError(f"Model file not found: {model_path}")
-    with open(model_path, 'rb') as f:
-        model = pickle.load(f)
-    return model
 
 def main():
     # Load and preprocess data

@@ -1,8 +1,8 @@
 from sklearn.pipeline import Pipeline
+from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import RandomizedSearchCV
-from sklearn.feature_extraction.text import TfidfVectorizer
-from data_preparation import load_and_preprocess_data, train_valid_test_split
+from utils import load_and_preprocess_data, train_valid_test_split, vectorize_data
 import config
 import pickle
 
