@@ -37,8 +37,8 @@ def main():
     # Train and save models
     for name, model in models.items():
         print(f"Training {name}...")
-        model_trained = train_model(xv_train, y_train, model)
-        save_model(model_trained, os.path.join(config.BASE_DIR, 'ml', 'model', f"{name.replace(' ', '_').lower()}.pkl"))
+        trained_model = train_model(xv_train, y_train, model)
+        save_model(trained_model, os.path.join(config.BASE_DIR, 'ml', 'model', f"{name.replace(' ', '_').lower()}.pkl"))
 
 if __name__ == "__main__":
     main()
