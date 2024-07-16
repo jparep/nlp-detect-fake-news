@@ -4,8 +4,8 @@ from sklearn.pipeline import Pipeline
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import RandomizedSearchCV
-from utils import load_pickle
-import config
+from .utils import load_pickle
+from . import config
 
 def hyperparameter_tuning(X_train, y_train):
     """Perform hyperparameter tuning using RandomizedSearchCV on a pre-trained model if available."""
