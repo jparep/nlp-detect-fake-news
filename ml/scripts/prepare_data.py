@@ -5,8 +5,8 @@ import re
 import nltk
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
-from nltk.tokenize import word_tokenize
 from sklearn.feature_extraction.text import TfidfVectorizer
+from nltk.tokenize import word_tokenize
 from sklearn.model_selection import train_test_split
 from utils import load_data, save_pickle, load_pickle
 import config
@@ -32,7 +32,6 @@ def preprocess_text(text):
 
 def load_and_preprocess_data():
     """Load, concatenate, and preprocess data."""
-    df = load_data(config.REAL_CSV_PATH)
     df_fake = load_data(config.FAKE_CSV_PATH)
     df_real = load_data(config.REAL_CSV_PATH)
     df_real['label'] = 'real'
@@ -60,7 +59,3 @@ def vectorize_data(X_train, X_valid, X_test, vectorizer_path):
     xv_test = vectorizer.transform(X_test)
     save_pickle(vectorizer, vectorizer_path)
     return xv_train, xv_valid, xv_test, vectorizer
-
-def load_model(model_path):
-    """Load a saved model."""
-    return load_pickle(model_path)
