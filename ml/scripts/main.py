@@ -1,7 +1,7 @@
 # main.py
 
 import os
-from prepare_data import load_and_preprocess_data, train_valid_test_split, vectorize_data
+from ml.scripts.prepare_data import load_and_preprocess_data, train_valid_test_split, vectorize_data
 from ml.scripts.train_model import train_and_save_models
 from ml.scripts.hyperparameter_tuning import hyperparameter_tuning
 from ml.scripts.evaluate_model import evaluate_model, plot_confusion_matrix
