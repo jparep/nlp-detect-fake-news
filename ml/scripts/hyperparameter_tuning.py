@@ -13,14 +13,21 @@ def hyperparameter_tuning(X_train, y_train):
     try:
         pre_trained_model = load_pickle(config.MODEL_PATHS['decision_tree'])
         print("Pre-trained model loaded successfully.")
+        
+        # Check if the pre-trained model is a pipeline
+        if isinstance(pre_trained_model, Pipeline):
+            pipeline = pre_trained_model
+        else:
+            pipeline = Pipeline([
+                ('vectorizer', TfidfVectorizer(max_features=10000)),
+                ('classifier', pre_trained_model)
+            ])
     except FileNotFoundError:
         print("No pre-trained model found. Using a new DecisionTreeClassifier.")
-        pre_trained_model = DecisionTreeClassifier(random_state=config.RANDOM_SEED)
-    
-    pipeline = Pipeline([
-        ('vectorizer', TfidfVectorizer(max_features=10000)),
-        ('classifier', pre_trained_model)
-    ])
+        pipeline = Pipeline([
+            ('vectorizer', TfidfVectorizer(max_features=10000)),
+            ('classifier', DecisionTreeClassifier(random_state=config.RANDOM_SEED))
+        ])
     
     param_dist = {
         'classifier__max_depth': [None, 10, 30, 60],
