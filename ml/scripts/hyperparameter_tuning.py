@@ -1,10 +1,13 @@
 # ml/scripts/hyperparameter_tuning.py
 
 from sklearn.model_selection import RandomizedSearchCV
+from sklearn.tree import DecisionTreeClassifier
 from utils import load_pickle
 import config
+from typing import Optional
+import numpy as np
 
-def hyperparameter_tuning(X_train, y_train):
+def hyperparameter_tuning(X_train: np.ndarray, y_train: np.ndarray) -> Optional[DecisionTreeClassifier]:
     """Perform hyperparameter tuning using RandomizedSearchCV on a pre-trained model if available."""
     try:
         # Load pre-trained model
@@ -22,8 +25,7 @@ def hyperparameter_tuning(X_train, y_train):
                                    cv=10, 
                                    n_jobs=-1, 
                                    verbose=1, 
-                                   random_state=config.RANDOM_SEED
-                                   )
+                                   random_state=config.RANDOM_SEED)
         model.fit(X_train, y_train)
         
         # Save the best estimator found by the search
