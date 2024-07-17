@@ -1,6 +1,5 @@
 # main.py
 
-import os
 from prepare_data import load_and_preprocess_data, train_valid_test_split, vectorize_data
 from train_model import train_and_save_models
 from hyperparameter_tuning import hyperparameter_tuning
