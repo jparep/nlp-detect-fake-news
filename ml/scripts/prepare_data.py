@@ -7,8 +7,8 @@ from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
-from utils import load_data, save_pickle
-import config
+from utils import load_data, save_pickle  # Relative import
+import config  # Updated import
 
 # Download necessary NLTK data (uncomment if running for the first time)
 # import nltk
@@ -47,13 +47,10 @@ def load_and_preprocess_data(real_path, fake_path):
     """Load, concatenate, and preprocess data."""
     try:
         df = load_data(real_path, fake_path)
-        if df is not None:
-            df = df[['text', 'label']]
-            df['text'] = df['text'].apply(preprocess_text)
-            df['label'] = df['label'].map({'real': 0, 'fake': 1})
-            return df
-        else:
-            return None
+        df = df[['text', 'label']]
+        df['text'] = df['text'].apply(preprocess_text)
+        df['label'] = df['label'].map({'real': 0, 'fake': 1})
+        return df
     except Exception as e:
         print(f"Error loading and preprocessing data: {e}")
         return None

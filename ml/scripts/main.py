@@ -1,17 +1,16 @@
-# main.py
-
-from .prepare_data import load_and_preprocess_data, train_valid_test_split, vectorize_data
-from .train_model import train_and_save_models
-from .hyperparameter_tuning import hyperparameter_tuning
-from .evaluate_model import evaluate_model, plot_confusion_matrix
-from .utils import save_pickle, load_pickle
-import config as config
+from prepare_data import load_and_preprocess_data, train_valid_test_split, vectorize_data
+from train_model import train_and_save_models
+from hyperparameter_tuning import hyperparameter_tuning
+from evaluate_model import evaluate_model, plot_confusion_matrix
+from utils import save_pickle, load_pickle
+import config
 
 def main():
     """Main function to execute the model training, tuning, and evaluation."""
+    model_paths = config.MODEL_PATHS
     try:
         # Load and preprocess data
-        df = load_and_preprocess_data()
+        df = load_and_preprocess_data(config.REAL_CSV_PATH, config.FAKE_CSV_PATH)
         X = df['text']
         y = df['label']
 
@@ -23,7 +22,6 @@ def main():
 
         # Ensure the models directory exists
         config.ensure_dir(config.MODEL_DIR)
-        model_paths = config.MODEL_PATHS
 
         # Train and save models
         train_and_save_models(xv_train, y_train, model_paths)
