@@ -6,7 +6,7 @@ from ml.scripts.train_model import train_and_save_models
 from ml.scripts.hyperparameter_tuning import hyperparameter_tuning
 from ml.scripts.evaluate_model import evaluate_model, plot_confusion_matrix
 from ml.scripts.utils import save_pickle, load_pickle
-from ml.scripts import config 
+import ml.scripts.config as config
 
 def main():
     try:
@@ -19,7 +19,7 @@ def main():
         X_train, X_valid, X_test, y_train, y_valid, y_test = train_valid_test_split(X, y)
 
         # Vectorize data
-        xv_train, xv_valid, xv_test, vectorizer = vectorize_data(X_train, X_valid, X_test, config.VECTORIZER_PATH)
+        xv_train, xv_valid, xv_test = vectorize_data(X_train, X_valid, X_test)
 
         # Ensure the models directory exists
         config.ensure_dir(config.MODEL_DIR)

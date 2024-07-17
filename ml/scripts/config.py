@@ -25,10 +25,10 @@ MODEL_PATHS = {
     'optimized_model': os.path.join(MODEL_DIR, 'optimized_model.pkl')
 }
 
-# Path to vectorizer
+# Path to vectorizer (not needed with BERT, but kept for completeness)
 VECTORIZER_PATH = os.path.join(MODEL_DIR, 'vectorizer.pkl')
 
-# Make sure directory exisist
+# Ensure the directory exists
 def ensure_dir(path):
     """Ensure the directory exists."""
     if not os.path.exists(path):
