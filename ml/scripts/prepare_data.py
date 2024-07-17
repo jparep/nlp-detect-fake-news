@@ -11,9 +11,10 @@ from utils import load_data, save_pickle
 import config
 
 # Download necessary NLTK data (uncomment if running for the first time)
-# nltk.download('punkt')
-# nltk.download('wordnet')
-# nltk.download('stopwords')
+import nltk
+nltk.download('punkt')
+nltk.download('wordnet')
+nltk.download('stopwords')
 
 # Initialize stopwords and lemmatizer
 stop_words = set(stopwords.words('english'))
