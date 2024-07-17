@@ -1,12 +1,12 @@
 # main.py
 
 import os
-from ml.scripts.prepare_data import load_and_preprocess_data, train_valid_test_split, vectorize_data
-from ml.scripts.train_model import train_and_save_models
-from ml.scripts.hyperparameter_tuning import hyperparameter_tuning
-from ml.scripts.evaluate_model import evaluate_model, plot_confusion_matrix
-from ml.scripts.utils import save_pickle, load_pickle
-import ml.scripts.config as config
+from prepare_data import load_and_preprocess_data, train_valid_test_split, vectorize_data
+from train_model import train_and_save_models
+from hyperparameter_tuning import hyperparameter_tuning
+from evaluate_model import evaluate_model, plot_confusion_matrix
+from utils import save_pickle, load_pickle
+import config as config
 
 def main():
     try:
@@ -19,7 +19,7 @@ def main():
         X_train, X_valid, X_test, y_train, y_valid, y_test = train_valid_test_split(X, y)
 
         # Vectorize data
-        xv_train, xv_valid, xv_test = vectorize_data(X_train, X_valid, X_test)
+        xv_train, xv_valid, xv_test = vectorize_data(X_train, X_valid, X_test, config.VECTORIZER_PATH)
 
         # Ensure the models directory exists
         config.ensure_dir(config.MODEL_DIR)
