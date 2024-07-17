@@ -11,10 +11,10 @@ from utils import load_data, save_pickle
 import config
 
 # Download necessary NLTK data (uncomment if running for the first time)
-import nltk
-nltk.download('punkt')
-nltk.download('wordnet')
-nltk.download('stopwords')
+# import nltk
+# nltk.download('punkt')
+# nltk.download('wordnet')
+# nltk.download('stopwords')
 
 # Initialize stopwords and lemmatizer
 stop_words = set(stopwords.words('english'))
@@ -43,14 +43,17 @@ def preprocess_text(text):
     lem = [lemmatizer.lemmatize(word) for word in word_tokens if word not in stop_words]
     return ' '.join(lem)
 
-def load_and_preprocess_data():
+def load_and_preprocess_data(real_path, fake_path):
     """Load, concatenate, and preprocess data."""
     try:
-        df = load_data(config.REAL_CSV_PATH, config.FAKE_CSV_PATH)
-        df = df[['text', 'label']]
-        df['text'] = df['text'].apply(preprocess_text)
-        df['label'] = df['label'].map({'real': 0, 'fake': 1})
-        return df
+        df = load_data(real_path, fake_path)
+        if df is not None:
+            df = df[['text', 'label']]
+            df['text'] = df['text'].apply(preprocess_text)
+            df['label'] = df['label'].map({'real': 0, 'fake': 1})
+            return df
+        else:
+            return None
     except Exception as e:
         print(f"Error loading and preprocessing data: {e}")
         return None
