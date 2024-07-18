@@ -11,15 +11,18 @@ def main():
     try:
         # Load and preprocess data
         df = load_and_preprocess_data(config.REAL_CSV_PATH, config.FAKE_CSV_PATH)
+        if df is None:
+            raise ValueError("Data loading and preprocessing failed.")
+        print(f"Preprocessed data shape: {df.shape}")
         X = df['text']
         y = df['label']
 
         # Split data into train, validation, and test sets
         X_train, X_valid, X_test, y_train, y_valid, y_test = train_valid_test_split(X, y)
-
+        
         # Vectorize data
         xv_train, xv_valid, xv_test = vectorize_data(X_train, X_valid, X_test, config.VECTORIZER_PATH)
-
+       
         # Ensure the models directory exists
         config.ensure_dir(config.MODEL_DIR)
 
@@ -27,7 +30,7 @@ def main():
         train_and_save_models(xv_train, y_train, model_paths)
 
         # Perform hyperparameter tuning and save the best model
-        optimized_model = hyperparameter_tuning(xv_train, y_train)
+        optimized_model = hyperparameter_tuning(xv_train, y_train, model_paths)
         save_pickle(optimized_model, model_paths['optimized_model'])
 
         # Evaluate models and plot results
