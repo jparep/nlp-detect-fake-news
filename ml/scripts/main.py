@@ -1,6 +1,5 @@
 from prepare_data import load_and_preprocess_data, train_valid_test_split, vectorize_data
 from train_model import train_and_save_models
-from hyperparameter_tuning import hyperparameter_tuning
 from evaluate_model import evaluate_model, plot_confusion_matrix
 from utils import save_pickle, load_pickle
 import config
@@ -11,9 +10,6 @@ def main():
     try:
         # Load and preprocess data
         df = load_and_preprocess_data(config.REAL_CSV_PATH, config.FAKE_CSV_PATH)
-        if df is None:
-            raise ValueError("Data loading and preprocessing failed.")
-        print(f"Preprocessed data shape: {df.shape}")
         X = df['text']
         y = df['label']
 
@@ -29,23 +25,14 @@ def main():
         # Train and save models
         train_and_save_models(xv_train, y_train, model_paths)
 
-        # Perform hyperparameter tuning and save the best model
-        optimized_model = hyperparameter_tuning(xv_train, y_train, model_paths)
-        save_pickle(optimized_model, model_paths['optimized_model'])
-
         # Evaluate models and plot results
         for name, model_path in model_paths.items():
             print(f"Evaluating {name.replace('_', ' ').title()}...")
             model = load_pickle(model_path)
             
-            if name == 'optimized_model':
-                y_train_pred = model.predict(X_train)
-                y_valid_pred = model.predict(X_valid)
-                y_test_pred = model.predict(X_test)
-            else:
-                y_train_pred = model.predict(xv_train)
-                y_valid_pred = model.predict(xv_valid)
-                y_test_pred = model.predict(xv_test)
+            y_train_pred = model.predict(xv_train)
+            y_valid_pred = model.predict(xv_valid)
+            y_test_pred = model.predict(xv_test)
             
             evaluate_model(y_train, y_train_pred, f"{name.replace('_', ' ').title()} (train)")
             evaluate_model(y_valid, y_valid_pred, f"{name.replace('_', ' ').title()} (valid)")
