@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 import pickle
 
@@ -5,13 +6,17 @@ def load_data(path):
     """Load data from a CSV file."""
     try:
         return pd.read_csv(path)
+    except FileNotFoundError:
+        print(f"File not found: {path}")
+    except pd.errors.EmptyDataError:
+        print(f"No data: {path}")
     except Exception as e:
         print(f"An error occurred while loading data from {path}: {e}")
-        return None
 
 def save_pickle(obj, path):
     """Save an object to a pickle file."""
     try:
+        os.makedirs(os.path.dirname(path), exist_ok=True)
         with open(path, 'wb') as f:
             pickle.dump(obj, f)
         print(f"Object successfully saved to {path}")
@@ -23,5 +28,9 @@ def load_pickle(path):
     try:
         with open(path, 'rb') as f:
             return pickle.load(f)
+    except FileNotFoundError:
+        print(f"File not found: {path}")
+    except pickle.UnpicklingError:
+        print(f"Unpickling error: {path}")
     except Exception as e:
         print(f"An error occurred while loading object from {path}: {e}")
