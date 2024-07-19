@@ -1,8 +1,5 @@
-import os
-from sklearn.ensemble import RandomForestClassifier
 from sklearn.tree import DecisionTreeClassifier
 import config
-from utils import save_pickle
 
 def train_model(X_train, y_train):
     """Train and save multiple models."""

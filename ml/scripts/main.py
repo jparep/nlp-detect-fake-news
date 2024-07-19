@@ -1,5 +1,5 @@
 from prepare_data import load_and_preprocess_data, train_valid_test_split, vectorize_data
-from train_model import train_and_save_models
+from training_model import train_model
 from evaluate_model import evaluate_model, plot_confusion_matrix
 from utils import save_pickle, load_pickle
 import config
@@ -23,7 +23,8 @@ def main():
     save_pickle(vectorizer, config.VECTORIZER_PATH)
 
     # Train and save models
-    train_and_save_models(xv_train, y_train, config.MODEL_PATH)
+    trained_model = train_model(xv_train, y_train)
+    save_pickle(trained_model, config.MODEL_PATH)
 
     
     model = load_pickle(config.MODEL_PATH)

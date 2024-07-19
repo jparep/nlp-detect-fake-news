@@ -7,7 +7,7 @@ from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
-from utils import load_data, save_pickle
+from utils import load_data
 import config
 
 # Download necessary NLTK data (uncomment if running for the first time)
