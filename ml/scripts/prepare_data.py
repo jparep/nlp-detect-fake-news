@@ -28,16 +28,11 @@ def load_and_preprocess_data(real_path, fake_path):
     try:
         df_real = load_data(real_path)
         df_fake = load_data(fake_path)
-        if df_real is None or df_fake is None:
-            raise ValueError("One of the data files is missing or empty.")
         
         df_real['label'] = 0
         df_fake['label'] = 1
         df = pd.concat([df_real, df_fake], axis=0).sample(frac=1).reset_index(drop=True)
         df['text'] = df['text'].apply(preprocess_text)
-        print(f"Combined data shape: {df.shape}")
-        print(f"First few rows of combined data:\n{df.head()}")
-        print(f"Data types:\n{df.dtypes}")
         return df
     except Exception as e:
         print(f"Error loading and preprocessing data: {e}")

@@ -20,9 +20,3 @@ MODEL_PATH = os.path.join(BASE_DIR, 'ml', 'models', 'model.pkl')
 
 # Path to vectorizer (not needed with BERT, but kept for completeness)
 VECTORIZER_PATH = os.path.join(BASE_DIR, 'ml', 'models', 'vectorizer.pkl')
-
-# Ensure the directory exists
-def ensure_dir(path):
-    """Ensure the directory exists."""
-    if not os.path.exists(path):
-        os.makedirs(path)
