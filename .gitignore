@@ -110,3 +110,8 @@ node_modules/
 __pycache__/
 *.log
 
+#JSon Package
+package-lock.json
+package.json
+
+
