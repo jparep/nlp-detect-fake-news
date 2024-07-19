@@ -97,3 +97,16 @@ build/html
 
 # Model and vectorizer files
 model/*.pkl
+
+# Ignore private key file
+alp-api.pem
+
+# Or if it's in a directory
+keys/alp-api.pem
+
+# Other files and directories to ignore
+node_modules/
+.env
+__pycache__/
+*.log
+
