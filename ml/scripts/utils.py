@@ -7,10 +7,8 @@ def load_data(path):
         return pd.read_csv(path)
     except FileNotFoundError:
         print(f"File not found: {path}")
-        return None
     except pd.errors.EmptyDataError:
         print(f"No data: {path}")
-        return None
     except Exception as e:
         print(f"An error occurred while loading data from {path}: {e}")
         return None
@@ -31,10 +29,7 @@ def load_pickle(path):
             return pickle.load(f)
     except FileNotFoundError:
         print(f"File not found: {path}")
-        return None
     except pickle.UnpicklingError:
         print(f"Unpickling error: {path}")
-        return None
     except Exception as e:
         print(f"An error occurred while loading object from {path}: {e}")
-        return None

@@ -22,7 +22,6 @@ MODEL_DIR = os.path.join(BASE_DIR, 'ml', 'models')
 MODEL_PATHS = {
     'random_forest': os.path.join(MODEL_DIR, 'random_forest.pkl'),
     'decision_tree': os.path.join(MODEL_DIR, 'decision_tree.pkl'),
-    'optimized_model': os.path.join(MODEL_DIR, 'optimized_model.pkl')
 }
 
 # Path to vectorizer (not needed with BERT, but kept for completeness)

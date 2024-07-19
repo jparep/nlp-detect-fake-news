@@ -7,9 +7,13 @@ import config
 def main():
     """Main function to execute the model training, tuning, and evaluation."""
     model_paths = config.MODEL_PATHS
+
     try:
         # Load and preprocess data
         df = load_and_preprocess_data(config.REAL_CSV_PATH, config.FAKE_CSV_PATH)
+        if df is None:
+            raise ValueError("Data loading and preprocessing failed.")
+        
         X = df['text']
         y = df['label']
 
@@ -17,11 +21,9 @@ def main():
         X_train, X_valid, X_test, y_train, y_valid, y_test = train_valid_test_split(X, y)
         
         # Vectorize data
-        xv_train, xv_valid, xv_test = vectorize_data(X_train, X_valid, X_test, config.VECTORIZER_PATH)
-       
-        # Ensure the models directory exists
-        config.ensure_dir(config.MODEL_DIR)
-
+        xv_train, xv_valid, xv_test, vectorizer = vectorize_data(X_train, X_valid, X_test)
+        save_pickle(vectorizer, config.VECTORIZER_PATH)
+    
         # Train and save models
         train_and_save_models(xv_train, y_train, model_paths)
 
@@ -29,7 +31,6 @@ def main():
         for name, model_path in model_paths.items():
             print(f"Evaluating {name.replace('_', ' ').title()}...")
             model = load_pickle(model_path)
-            
             y_train_pred = model.predict(xv_train)
             y_valid_pred = model.predict(xv_valid)
             y_test_pred = model.predict(xv_test)
