@@ -34,3 +34,8 @@ Follow these steps to set up the project on your local machine:
    ```bash
    git clone git@github.com:jparep/nlp-detect-fake-news.git
    cd nlp-detect-fake-news
+
+# LICENSE:
+
+This updated `README.md` provides a comprehensive overview of your project, including installation, usage, project structure, and API endpoints.
+
