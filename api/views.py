@@ -8,8 +8,8 @@ import joblib
 import os
 
 # Load the model and vectorizer at the start
-MODEL_PATH = os.path.join(os.path.dirname(__file__), '../model/model.pkl')
-VECTORIZER_PATH = os.path.join(os.path.dirname(__file__), '../model/vectorizer.pkl')
+MODEL_PATH = os.path.join(os.path.dirname(__file__), '../ml/model/model.pkl')
+VECTORIZER_PATH = os.path.join(os.path.dirname(__file__), '../ml/model/vectorizer.pkl')
 
 model = joblib.load(MODEL_PATH)
 vectorizer = joblib.load(VECTORIZER_PATH)
