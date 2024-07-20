@@ -9,14 +9,12 @@ dependencies:
   - scikit-learn
   - matplotlib
   - nltk
+  - psycopg2
   - pip
   - pip:
     - django
     - djangorestframework
     - django-cors-headers
     - django-tailwind
-    - PySide6
-    - PySide6_Addons
-    - PySide6_Essentials
-    - tqdm
-
+    - python-decouple
+    - joblib

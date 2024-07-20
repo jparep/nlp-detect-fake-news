@@ -1,7 +1,7 @@
 from prepare_data import load_and_preprocess_data, train_valid_test_split, vectorize_data
 from training_model import train_model
 from evaluate_model import evaluate_model, plot_confusion_matrix
-from utils import save_pickle, load_pickle
+from utils import save_joblib, load_joblib
 import config
 
 def main():
@@ -24,16 +24,16 @@ def main():
         xv_train, xv_valid, xv_test, vectorizer = vectorize_data(X_train, X_valid, X_test)
         if any([xv_train is None, xv_valid is None, xv_test is None]):
             raise ValueError("Data vectorization failed.")
-        save_pickle(vectorizer, config.VECTORIZER_PATH)
+        save_joblib(vectorizer, config.VECTORIZER_PATH)
 
         # Train and save models
         trained_model = train_model(xv_train, y_train)
         if trained_model is None:
             raise ValueError("Model training failed.")
-        save_pickle(trained_model, config.MODEL_PATH)
+        save_joblib(trained_model, config.MODEL_PATH)
 
         # Load the trained model
-        model = load_pickle(config.MODEL_PATH)
+        model = load_joblib(config.MODEL_PATH)
         if model is None:
             raise ValueError("Model loading failed.")
 
