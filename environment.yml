@@ -10,4 +10,13 @@ dependencies:
   - matplotlib
   - nltk
   - psycopg2
+  - postgresql
   - pip
+  - pip:
+    - django
+    - djangorestframework
+    - django-cors-headers
+    - django-tailwind
+    - python-decouple
+    - joblib
+    - gunicorn

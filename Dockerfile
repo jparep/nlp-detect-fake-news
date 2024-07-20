@@ -16,11 +16,7 @@ SHELL ["conda", "run", "-n", "nlp-env", "/bin/bash", "-c"]
 # Copy the current directory contents into the container at /app
 COPY . /app
 
-# Install any remaining packages specified in requirements.txt
-RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
-
-# Make port 8000 available to the world outside this container
+# Expose the port the app runs on
 EXPOSE 8000
 
 # Run the Django server
