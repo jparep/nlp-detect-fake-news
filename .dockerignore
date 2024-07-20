@@ -16,7 +16,9 @@ sdist
 var
 wheels
 share/python-wheels
+*.egg-info/
 .installed.cfg
+*.egg
 
 # Installer logs
 pip-log.txt
@@ -70,3 +72,10 @@ media/
 
 # macOS
 .DS_Store
+
+# Docker
+Dockerfile
+docker-compose.yml
+
+# Other
+*__pycache__/
