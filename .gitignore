@@ -94,6 +94,7 @@ build/html
 *.sql
 *.sqlite
 *.sqlite3
+db.sqlite3
 
 # Model and vectorizer files
 model/*.pkl
