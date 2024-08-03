@@ -13,10 +13,10 @@ dependencies:
   - postgresql
   - pip
   - pip:
-    - django
-    - djangorestframework
-    - django-cors-headers
-    - django-tailwind
-    - python-decouple
-    - joblib
-    - gunicorn
+      - django
+      - djangorestframework
+      - django-cors-headers
+      - django-tailwind
+      - python-decouple
+      - joblib
+      - gunicorn

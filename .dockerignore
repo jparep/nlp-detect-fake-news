@@ -1,81 +1,58 @@
-# Byte-compiled / optimized / DLL files
-*.py[cod]
-*$py.class
-
-# C extensions
-*.so
-
-# Packages
-*.egg
-*.egg-info
-dist
-build
-eggs
-parts
-sdist
-var
-wheels
-share/python-wheels
-*.egg-info/
-.installed.cfg
-*.egg
-
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Environments
-.env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
-
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.nox/
-.coverage
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-.hypothesis/
-.pytest_cache/
-cover/
-
-# Translations
-*.mo
-*.pot
-
-# Django stuff:
-*.log
-*.pot
-*.pyc
-*.pyo
-*.sqlite3
-
-# Static files
-staticfiles/
-media/
-
-# Jupyter Notebook checkpoints
+# Ignore Jupyter notebook checkpoints
 .ipynb_checkpoints
 
-# PyCharm
+# Ignore PyCharm project files
 .idea/
 
-# VS Code
+# Ignore Visual Studio Code settings
 .vscode/
 
-# macOS
+# Ignore macOS system files
 .DS_Store
 
-# Docker
+# Ignore Dockerfile and Docker Compose files
 Dockerfile
 docker-compose.yml
 
-# Other
-*__pycache__/
+# Ignore Python cache files and directories
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Ignore virtual environments
+env/
+venv/
+.nvenv/
+
+# Ignore SQLite database files
+db.sqlite3
+
+# Ignore environment and configuration files
+.env
+.env.*
+
+# Ignore log files
+*.log
+
+# Ignore Node.js dependency directories
+node_modules/
+
+# Ignore distribution files
+dist/
+build/
+*.egg-info/
+
+# Ignore coverage reports
+coverage/
+*.cover
+
+# Ignore data files
+*.csv
+*.tsv
+
+# Ignore other unnecessary files and directories
+*.tmp
+*.temp
+tmp/
+temp/

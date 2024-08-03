@@ -16,8 +16,12 @@ SHELL ["conda", "run", "-n", "nlp-env", "/bin/bash", "-c"]
 # Copy the current directory contents into the container at /app
 COPY . /app
 
-# Expose the port the app runs on
+# Ensure the environment is activated:
+RUN echo "conda activate nlp-env" >> ~/.bashrc
+ENV PATH /opt/conda/envs/nlp-env/bin:$PATH
+
+# Make port 8000 available to the world outside this container
 EXPOSE 8000
 
 # Run the Django server
-CMD ["conda", "run", "--no-capture-output", "-n", "nlp-env", "gunicorn", "--chdir", "core", "--bind", ":8000", "core.wsgi:application"]
+CMD ["gunicorn", "--chdir", "core", "--bind", "0.0.0.0:8000", "core.wsgi:application"]
