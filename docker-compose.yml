@@ -3,7 +3,7 @@ version: '3.9'
 services:
   web:
     build: .
-    command: gunicorn --chdir core --bind :8000 core.wsgi:application
+    command: conda run --no-capture-output -n nlp-env gunicorn --chdir core --bind 0.0.0.0:8000 core.wsgi:application
     volumes:
       - .:/app
     env_file:
@@ -12,6 +12,13 @@ services:
       - "8000:8000"
     depends_on:
       - db
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+        reservations:
+          memory: 256M
 
   db:
     image: postgres:13
@@ -22,6 +29,13 @@ services:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_HOST_AUTH_METHOD: trust
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+        reservations:
+          memory: 256M
 
 volumes:
   postgres_data:

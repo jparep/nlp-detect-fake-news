@@ -20,8 +20,6 @@ staticfiles/
 
 # Environment variable files
 .env
-./
-../
 
 # MacOS related files
 .DS_Store
@@ -88,13 +86,9 @@ build/html
 
 # Logs and database files
 *.log
-*.pot
-*.mo
-*.log
 *.sql
 *.sqlite
 *.sqlite3
-db.sqlite3
 
 # Model and vectorizer files
 model/*.pkl
@@ -107,12 +101,10 @@ keys/alp-api.pem
 
 # Other files and directories to ignore
 node_modules/
-.env
-__pycache__/
-*.log
 
-#JSon Package
+# JSon Package
 package-lock.json
 package.json
 
-
+# Ignore test directories
+tests/
