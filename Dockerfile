@@ -13,8 +13,9 @@ RUN apt-get update && \
 # Copy the environment.yml file to the container
 COPY environment.yml /app/
 
-# Create the Conda environment
-RUN conda env create -f environment.yml
+# Create the Conda environment with retry logic
+RUN conda config --set channel_priority strict && \
+    for i in {1..5}; do conda env create -f environment.yml && break || sleep 5; done
 
 # Activate the environment and set the PATH
 SHELL ["conda", "run", "-n", "nlp-env", "/bin/bash", "-c"]
